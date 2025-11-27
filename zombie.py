@@ -157,13 +157,13 @@ class Zombie:
         pass
 
     def boy_ball_check(self):
-        if self.ball_count <= common.boy.ball_count:
+        if self.ball_count < common.boy.ball_count:
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
 
     def zombie_more_balls(self):
-        if self.ball_count > common.boy.ball_count:
+        if self.ball_count >= common.boy.ball_count:
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
