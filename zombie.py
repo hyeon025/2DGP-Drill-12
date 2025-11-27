@@ -203,6 +203,3 @@ class Zombie:
         root = Selector('ROOT', near, wander)
 
         self.bt = BehaviorTree(root)
-
-
-pass
