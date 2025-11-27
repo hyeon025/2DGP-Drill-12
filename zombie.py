@@ -156,6 +156,11 @@ class Zombie:
         return BehaviorTree.SUCCESS
         pass
 
+    def ball_check(self,num):
+        if self.ball_count >= num:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.RUNNING
 
     def build_behavior_tree(self):
         a1 = Action("목적지 설정",self.set_target_location,800,800)
