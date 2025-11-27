@@ -168,6 +168,19 @@ class Zombie:
         else:
             return BehaviorTree.FAIL
 
+    def run_location(self):
+        self.state = 'Walk'
+        run_x = self.x + (self.x - common.boy.x)
+        run_y = self.y + (self.y - common.boy.y)
+        self.move_little_to(run_x, run_y)
+
+        if not self.distance_less_than(self.x, self.y, common.boy.x, common.boy.y, 7):
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.RUNNING
+
+
+
     def build_behavior_tree(self):
         # a1 = Action("목적지 설정",self.set_target_location,800,800)
         #
@@ -192,10 +205,10 @@ class Zombie:
         c2 = Condition('소년의 공 > 좀비의 공', self.boy_ball_check)
 
         c3 = Condition('좀비의 공 >= 소년의 공', self.zombie_more_balls)
-        # a5 = Action('다음 도망 위치 설정', self.get_patrol_location)
+        a5 = Action('도망 위치 설정', self.run_location)
 
         wander = Sequence('Wander', a3, a2)
-        run = Sequence('Run', c2, a3, a2)
+        run = Sequence('Run', c2, a5, a2)
         chase = Sequence('Chase', c3, a4)
 
         chase_or_run = Selector('추적 또는 도망', run, chase)
