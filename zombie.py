@@ -176,7 +176,7 @@ class Zombie:
         # move_to_target_location = Sequence("지정된 목적지로 이동",a1,a2)
         #
         a3 = Action("랜덤위치 설정",self.set_random_location)
-        # wander = Sequence("랜덤위치로 이동",a3,a2)
+        #wander = Sequence("랜덤위치로 이동",a3,a2)
         #
         c1 = Condition('소년이 근처에 있는가?', self.if_boy_nearby, 7)
         a4 = Action('소년한테 접근', self.move_to_boy)
@@ -184,7 +184,7 @@ class Zombie:
         #
         # chase_or_wander = Selector('추적 아니면 배회',chase_boy_if_nearby,wander)
         #
-        a5 = Action('다음 순찰 위치 획득', self.get_patrol_location)
+        #a5 = Action('다음 순찰 위치 획득', self.get_patrol_location)
         # root = patrol = Sequence('순찰', a5, a2)
         #
         # root = chase_or_wander = Selector('추적 아니면 배회', chase_boy_if_nearby, patrol)
@@ -192,9 +192,10 @@ class Zombie:
         c2 = Condition('소년의 공 > 좀비의 공', self.boy_ball_check)
 
         c3 = Condition('좀비의 공 >= 소년의 공', self.zombie_more_balls)
+        # a5 = Action('다음 도망 위치 설정', self.get_patrol_location)
 
         wander = Sequence('Wander', a3, a2)
-        run = Sequence('Run', c2, a5, a2)
+        run = Sequence('Run', c2, a3, a2)
         chase = Sequence('Chase', c3, a4)
 
         chase_or_run = Selector('추적 또는 도망', run, chase)
